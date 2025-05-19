@@ -38,16 +38,16 @@ function displayLibrary() {
     row.setAttribute("data-id", book.id);
 
     for (const key of ["title", "author"]) {
-      const data = document.createElement("td");
-      data.textContent = book[key];
-      row.appendChild(data);
+      const cell = document.createElement("td");
+      cell.textContent = book[key];
+      row.appendChild(cell);
     }
 
-    const pagesData = document.createElement("td");
-    pagesData.textContent = book.pages && !isNaN(book.pages) ? book.pages : "-";
-    row.appendChild(pagesData);
+    const pagesCell = document.createElement("td");
+    pagesCell.textContent = book.pages && !isNaN(book.pages) ? book.pages : "-";
+    row.appendChild(pagesCell);
 
-    const readData = document.createElement("td");
+    const readCell = document.createElement("td");
     const readBtn = document.createElement("button");
     if (book.read) {
       readBtn.textContent = "READ";
@@ -57,19 +57,21 @@ function displayLibrary() {
       readBtn.style.backgroundColor = "tomato";
     }
     readBtn.addEventListener("click", () => {
-      toggleBookReadStatus(readData.parentNode.getAttribute("data-id"));
+      toggleBookReadStatus(readCell.parentNode.getAttribute("data-id"));
       displayLibrary();
     });
-    readData.appendChild(readBtn);
-    row.appendChild(readData);
+    readCell.appendChild(readBtn);
+    row.appendChild(readCell);
 
+    const deleteCell = document.createElement("td");
     const deleteIcon = document.createElement("svg");
     deleteIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>`;
     deleteIcon.addEventListener("click", () => {
       removeBookFromLibrary(deleteIcon.parentNode.getAttribute("data-id"));
       displayLibrary();
     });
-    row.appendChild(deleteIcon);
+    deleteCell.appendChild(deleteIcon);
+    row.appendChild(deleteCell);
 
     tableBody.appendChild(row);
   }

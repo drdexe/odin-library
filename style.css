@@ -52,7 +52,6 @@ table {
 
 tr {
   border-bottom: 1px solid black;
-  position: relative;
 }
 
 th,
@@ -60,6 +59,11 @@ td {
   text-align: left;
   padding: 1rem;
   padding-right: 5rem;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 1rem;
 }
 
 table button {
@@ -70,7 +74,4 @@ table button {
 
 svg {
   height: 30px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-100%, -50%);
 }
