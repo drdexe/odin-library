@@ -26,6 +26,11 @@ function removeBookFromLibrary(id) {
   myLibrary.splice(myLibrary.findIndex(book => book.id === id), 1);
 }
 
+function toggleBookReadStatus(id) {
+  const index = myLibrary.findIndex(book => book.id === id);
+  myLibrary[index].read = !myLibrary[index].read;
+}
+
 function displayLibrary() {
   tableBody.innerHTML = "";
   for (const book of myLibrary) {
@@ -43,16 +48,28 @@ function displayLibrary() {
     row.appendChild(pagesData);
 
     const readData = document.createElement("td");
-    readData.textContent = book.read ? "READ" : "NOT READ";
-    row.appendChild(readData);
-
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.addEventListener("click", () => {
-      removeBookFromLibrary(deleteBtn.parentNode.getAttribute("data-id"));
+    const readBtn = document.createElement("button");
+    if (book.read) {
+      readBtn.textContent = "READ";
+      readBtn.style.backgroundColor = "greenyellow";
+    } else {
+      readBtn.textContent = "NOT READ";
+      readBtn.style.backgroundColor = "tomato";
+    }
+    readBtn.addEventListener("click", () => {
+      toggleBookReadStatus(readData.parentNode.getAttribute("data-id"));
       displayLibrary();
     });
-    row.appendChild(deleteBtn);
+    readData.appendChild(readBtn);
+    row.appendChild(readData);
+
+    const deleteIcon = document.createElement("svg");
+    deleteIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>`;
+    deleteIcon.addEventListener("click", () => {
+      removeBookFromLibrary(deleteIcon.parentNode.getAttribute("data-id"));
+      displayLibrary();
+    });
+    row.appendChild(deleteIcon);
 
     tableBody.appendChild(row);
   }
@@ -68,9 +85,9 @@ confirmBtn.addEventListener("click", (event) => {
     dialog.close();
     addBookToLibrary(titleInput.value, authorInput.value, pagesInput.value, readInput.checked);
     displayLibrary();
+    form.reset();
   }
 });
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 298, false);
-addBookToLibrary("test", "test", 1, true);
 displayLibrary()

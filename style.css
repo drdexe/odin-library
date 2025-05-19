@@ -1,0 +1,76 @@
+body {
+  font-family: Garamond, serif;
+  font-size: clamp(1rem, 2vw, 2rem);
+}
+
+h1 {
+  text-align: center;
+}
+
+#newBookBtn {
+  display: block;
+  margin: auto;
+  padding: .5em 2em;
+  font-size: inherit;
+}
+
+dialog div {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1ch;
+}
+
+input {
+  padding: .25rem;
+  font: inherit;
+}
+
+input[type="text"] {
+  width: 30ch;
+}
+
+input[type="number"] {
+  width: 6ch;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+dialog button {
+  flex: 1;
+  padding: .5rem;
+}
+
+table {
+  margin: 5% auto;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid black;
+  position: relative;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 1rem;
+  padding-right: 5rem;
+}
+
+table button {
+  width: 15ch;
+  height: 30px;
+  font-size: .75em;
+}
+
+svg {
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-100%, -50%);
+}
