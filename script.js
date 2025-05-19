@@ -22,10 +22,15 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(new Book(title, author, pages, read));
 }
 
+function removeBookFromLibrary(id) {
+  myLibrary.splice(myLibrary.findIndex(book => book.id === id), 1);
+}
+
 function displayLibrary() {
   tableBody.innerHTML = "";
   for (const book of myLibrary) {
     const row = document.createElement("tr");
+    row.setAttribute("data-id", book.id);
 
     for (const key of ["title", "author"]) {
       const data = document.createElement("td");
@@ -40,6 +45,14 @@ function displayLibrary() {
     const readData = document.createElement("td");
     readData.textContent = book.read ? "READ" : "NOT READ";
     row.appendChild(readData);
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => {
+      removeBookFromLibrary(deleteBtn.parentNode.getAttribute("data-id"));
+      displayLibrary();
+    });
+    row.appendChild(deleteBtn);
 
     tableBody.appendChild(row);
   }
