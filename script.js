@@ -34,7 +34,7 @@ function displayLibrary() {
     }
 
     const pagesData = document.createElement("td");
-    pagesData.textContent = Number.isInteger(book.pages) ? book.pages : "-";
+    pagesData.textContent = book.pages && !isNaN(book.pages) ? book.pages : "-";
     row.appendChild(pagesData);
 
     const readData = document.createElement("td");
