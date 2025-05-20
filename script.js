@@ -92,4 +92,4 @@ confirmBtn.addEventListener("click", (event) => {
 });
 
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 298, false);
-displayLibrary()
+displayLibrary();
